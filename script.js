@@ -1,5 +1,9 @@
 let cart = [];
 
+const saveCart = () => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
+
 const calculateTotal = () => {
   let total = 0;
   cart.forEach((item) => {
@@ -14,6 +18,7 @@ const formatPrice = (price) => {
 
 const removeFromCart = (index) => {
   cart.splice(index, 1);
+  saveCart();
   renderCart();
 };
 
@@ -44,6 +49,7 @@ const renderCart = () => {
 
 const addToCart = (product) => {
   cart.push(product);
+  saveCart();
   renderCart();
 };
 
@@ -87,6 +93,7 @@ if (payButton) {
     } else {
       alert("Покупка прошла успешно!");
       cart = [];
+      saveCart();
       renderCart();
     }
   });
@@ -96,6 +103,14 @@ const clearButton = document.querySelector("#btn-clear-cart");
 if (clearButton) {
   clearButton.addEventListener("click", () => {
     cart = [];
+    saveCart();
     renderCart();
   });
+}
+
+const savedCart = localStorage.getItem("cart");
+
+if (savedCart) {
+  cart = JSON.parse(savedCart);
+  renderCart();
 }
