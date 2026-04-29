@@ -181,3 +181,99 @@ ul.nav a:hover {
 .btn-remove:hover {
   background-color: rgb(146, 43, 33);
 }
+
+.auth-container {
+  max-width: 360px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #dce8f3;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #dce8f3;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: rgb(41, 98, 155);
+}
+
+.btn-login {
+  display: inline-block;
+  padding: 8px 24px;
+  background-color: rgb(41, 98, 155);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.btn-login:hover {
+  background-color: rgb(26, 62, 98);
+}
+
+.btn-logout {
+  display: inline-block;
+  padding: 8px 24px;
+  background-color: rgb(192, 57, 43);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.btn-logout:hover {
+  background-color: rgb(146, 43, 33);
+}
+
+.error-message {
+  color: rgb(192, 57, 43);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 12px;
+  background-color: rgb(253, 237, 236);
+  border: 1px solid rgb(192, 57, 43);
+  margin-bottom: 14px;
+}
+
+.dashboard-container {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #dce8f3;
+  max-width: 500px;
+}
+
+.dashboard-welcome {
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+.dashboard-info {
+  margin: 15px 0;
+  padding: 12px;
+  background-color: rgb(240, 244, 248);
+  font-size: 15px;
+}
+
+.dashboard-info p {
+  margin: 5px 0;
+}
