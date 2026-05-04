@@ -6,29 +6,35 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
-require_once 'users.php';
+require_once 'config/database.php';
+require_once 'models/User.php';
 require_once 'logger.php';
 
 $error = '';
+$email = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $login = trim($_POST['login'] ?? '');
+    $email = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
-    if ($login === '' || $password === '') {
+    if ($email === '' || $password === '') {
         $error = 'Пожалуйста, заполните все поля.';
-    } elseif (!isset($users[$login])) {
-        writeLog($login, 'FAIL_LOGIN');
-        $error = 'Неверный логин или пароль.';
-    } elseif (!password_verify($password, $users[$login]['password_hash'])) {
-        writeLog($login, 'FAIL_LOGIN');
-        $error = 'Неверный логин или пароль.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Введите корректный email.';
     } else {
-        $_SESSION['user_id'] = $users[$login]['id'];
-        $_SESSION['username'] = $login;
-        writeLog($login, 'SUCCESS_LOGIN');
-        header('Location: dashboard.php');
-        exit;
+        $user = User::findByEmailWithHash($email);
+
+        if ($user === null || !password_verify($password, $user['password_hash'])) {
+            writeLog($email, 'FAIL_LOGIN');
+            $error = 'Неверный email или пароль.';
+        } else {
+            $_SESSION['user_id'] = (int)$user['id'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['email'] = $user['email'];
+            writeLog($email, 'SUCCESS_LOGIN');
+            header('Location: dashboard.php');
+            exit;
+        }
     }
 }
 ?>
@@ -58,9 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <form method="POST" action="login.php">
             <div class="form-group">
-                <label for="login">Логин:</label>
-                <input type="text" id="login" name="login" class="form-input"
-                       value="<?php echo htmlspecialchars($login ?? ''); ?>" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-input"
+                       value="<?php echo htmlspecialchars($email); ?>" required>
             </div>
 
             <div class="form-group">
