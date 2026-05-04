@@ -2,8 +2,8 @@
 session_start();
 require_once 'logger.php';
 
-$username = $_SESSION['username'] ?? 'unknown';
-writeLog($username, 'LOGOUT');
+$email = $_SESSION['email'] ?? 'unknown';
+writeLog($email, 'LOGOUT');
 
 session_unset();
 session_destroy();

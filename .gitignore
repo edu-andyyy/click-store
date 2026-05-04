@@ -1,0 +1,10 @@
+logs/*.log
+db/*.sqlite
+db/*.sqlite-*
+.env
+.env.local
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+vendor/

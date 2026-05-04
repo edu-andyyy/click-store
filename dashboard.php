@@ -6,8 +6,9 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$username = htmlspecialchars($_SESSION['username']);
-$userId = $_SESSION['user_id'];
+$userId = (int)$_SESSION['user_id'];
+$name = htmlspecialchars($_SESSION['name'] ?? '');
+$email = htmlspecialchars($_SESSION['email'] ?? '');
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -21,7 +22,7 @@ $userId = $_SESSION['user_id'];
     <ul class="nav">
         <li><a href="index.html">Главная</a></li>
         <li><a href="catalog.html">Каталог</a></li>
-        <li><a href="logout.php">Выйти (<?php echo $username; ?>)</a></li>
+        <li><a href="logout.php">Выйти (<?php echo $name; ?>)</a></li>
     </ul>
 
     <hr>
@@ -29,11 +30,12 @@ $userId = $_SESSION['user_id'];
     <h1>Личный кабинет</h1>
 
     <div class="dashboard-container">
-        <p class="dashboard-welcome">Добро пожаловать, <b><?php echo $username; ?></b>!</p>
+        <p class="dashboard-welcome">Добро пожаловать, <b><?php echo $name; ?></b>!</p>
 
         <div class="dashboard-info">
             <p><b>ID пользователя:</b> <?php echo $userId; ?></p>
-            <p><b>Логин:</b> <?php echo $username; ?></p>
+            <p><b>Имя:</b> <?php echo $name; ?></p>
+            <p><b>Email:</b> <?php echo $email; ?></p>
         </div>
 
         <a href="catalog.html" class="btn-login">Перейти в каталог</a>
